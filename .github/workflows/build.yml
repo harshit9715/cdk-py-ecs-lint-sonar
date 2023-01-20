@@ -5,13 +5,12 @@ jobs:
     name: Linting and Formatting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+          python-version: |
+            3.7
+            3.10
       - name: Install Code Dependencies
         run: |
          pip install --upgrade pip
@@ -21,13 +20,12 @@ jobs:
       - name: Apply code linting and formatting
         run: pre-commit run --all-files
 
-  sonarQubeTrigger:
-    name: SonarQube Trigger
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: SonarQube Scan
-      uses: kitabisa/sonarqube-action@master
-      with:
-        host: ${{ secrets.SONARQUBE_HOST }}
-        login: ${{ secrets.SONARQUBE_TOKEN }}
+      - name: Run all test cases
+        run: pytest
+
+      - uses: actions/checkout@master
+      - name: SonarQube Scan
+        uses: kitabisa/sonarqube-action@master
+        with:
+          host: ${{ secrets.SONARQUBE_HOST }}
+          login: ${{ secrets.SONARQUBE_TOKEN }}
