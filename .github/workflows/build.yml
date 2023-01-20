@@ -6,11 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
       - name: Install Code Dependencies
         run: |
          pip install --upgrade pip
-         pwd
-         ls -lisa
          pip install -r requirements.txt
          pip install -r requirements-dev.txt
 
