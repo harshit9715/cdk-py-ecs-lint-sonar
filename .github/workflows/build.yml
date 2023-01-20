@@ -1,7 +1,7 @@
 on: push
 name: Main Workflow
 jobs:
-  - validate-lint:
+  validate-lint:
     name: Linting and Formatting
     runs-on: ubuntu-latest
     steps:
@@ -14,7 +14,7 @@ jobs:
       - name: Apply code linting and formatting
         run: pre-commit run --all-files
 
-  - sonarQubeTrigger:
+  sonarQubeTrigger:
     name: SonarQube Trigger
     runs-on: ubuntu-latest
     steps:
