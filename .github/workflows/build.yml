@@ -8,6 +8,8 @@ jobs:
       - name: Install Code Dependencies
         run: |
          pip install --upgrade pip
+         pwd
+         ls -lisa
          pip install -r requirements.txt
          pip install -r requirements-dev.txt
 
