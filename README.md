@@ -37,6 +37,23 @@ Once the virtualenv is activated, you can install the required dependencies.
 $ pip install -r requirements.txt
 ```
 
+Once the dependencies are installed, install the dev dependencies as well. this will make sure the developed code follows proper styling and linting pattern. All config files are already added.
+
+You can simply prepare linter and formatters to run on git hooks by running the below command.
+
+```
+# https://aws.amazon.com/blogs/infrastructure-and-automation/use-git-pre-commit-hooks-avoid-aws-cloudformation-errors/
+
+$ pre-commit install
+$ pre-commit autoupdate
+```
+
+If you add or remove hooks in the .pre-commit-config.yaml file, apply the changes by running the following command:
+
+```
+$ git add .pre-commit-config.yaml
+```
+
 At this point you can now synthesize the CloudFormation template for this code.
 
 ```

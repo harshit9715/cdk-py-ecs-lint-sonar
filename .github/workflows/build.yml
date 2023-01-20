@@ -1,0 +1,26 @@
+on: push
+name: Main Workflow
+jobs:
+  - validate-lint:
+    name: Linting and Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Code Dependencies
+        run: |
+         pip install --upgrade pip
+         pip install -r requirements.txt
+         pip install -r requirements-dev.txt
+
+      - name: Apply code linting and formatting
+        run: pre-commit run --all-files
+
+  - sonarQubeTrigger:
+    name: SonarQube Trigger
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@master
+      with:
+        host: ${{ secrets.SONARQUBE_HOST }}
+        login: ${{ secrets.SONARQUBE_TOKEN }}
